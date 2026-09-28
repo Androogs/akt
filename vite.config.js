@@ -3,11 +3,12 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  base: "/",
   server: {
     host: true,
     allowedHosts: [
-      '.trycloudflare.com', // permite todos los de cloudflared
-      'similar-farms-sarah-carlos.trycloudflare.com' // o solo este específico
+      "rose-hebrew-fighter-enabling.trycloudflare.com",
+      ".trycloudflare.com"
     ]
   }
 })
