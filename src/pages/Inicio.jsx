@@ -9,13 +9,13 @@ import useReveal from "../components/useReveal.js";
 const SLIDES = DESTACADAS.map(getMoto).filter(Boolean);
 const MS = 6000;
 
-// CARRUSEL NUEVO - pon tus imagenes en /public
+// CARRUSEL - FIX VERCEL: sin "public/", solo "/"
 const BANNERS = [
-  "public/akt-motos-home-banner-nkd-desktop.webp",
-  "public/akt-motos-home-banner-seguridad-vial-desktop-v2.webp",
-  "public/Banner_home_agosto_NKD-01-1.jpg"
+  "/akt-motos-home-banner-nkd-desktop.webp",
+  "/akt-motos-home-banner-seguridad-vial-desktop-v2.webp",
+  "/Banner_home_agosto_NKD-01-1.jpg"
 ];
-const MS_BANNER = 1800;
+const MS_BANNER = 4000;
 
 export default function Inicio() {
   const [i, setI] = useState(0);
@@ -46,7 +46,18 @@ export default function Inicio() {
       <section className="bc" onMouseEnter={() => setPausaB(true)} onMouseLeave={() => setPausaB(false)}>
         <div className="bc__track">
           {BANNERS.map((src, k) => (
-            <img key={k} src={src} alt={`Banner ${k + 1}`} className={`bc__img ${k === b? "is-on" : ""}`} />
+            <img
+              key={k}
+              src={src}
+              alt={`Banner ${k + 1}`}
+              className={`bc__img ${k === b? "is-on" : ""}`}
+              style={{ backgroundColor: "#fff" }}
+              loading={k === 0? "eager" : "lazy"}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                console.error('No se encontró:', src);
+              }}
+            />
           ))}
         </div>
         <button className="bc__arrow bc__arrow--prev" onClick={() => setB((p) => (p - 1 + BANNERS.length) % BANNERS.length)}>‹</button>
@@ -81,7 +92,7 @@ export default function Inicio() {
                     <p>{c.lema}</p>
                     <small>{lista.length} modelos · desde {cop(Math.min(...lista.map((x) => x.precio)))}*</small>
                   </div>
-                  <img src={img(hero)} alt="" loading="lazy" />
+                  <img src={img(hero)} alt={c.nombre} loading="lazy" />
                   <span className="line__go"><IconArrow /></span>
                 </Link>
               );
