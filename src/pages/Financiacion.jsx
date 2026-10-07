@@ -14,7 +14,7 @@ const PASOS = [
   ["Elige tu AKT", "Escoge el modelo que se ajusta a tu estilo y presupuesto."],
   ["Simula tu cuota", "Calcula una cuota estimada con la herramienta de esta página."],
   ["Solicita el estudio", "Envía tus datos y un asesor te acompaña en el proceso."],
-  ["Estrena", "Firmas, matriculamos y te entregamos tu moto en Palmira."],
+  ["Estrena", "Firmas, matriculamos y te entregamos tu moto."],
 ];
 
 export default function Financiacion() {
@@ -36,7 +36,7 @@ export default function Financiacion() {
   return (
     <>
       <PageHeader eyebrow="Crédito" title="Financiación" crumbs={[{ label: "Financiación" }]}>
-        <p>Simula tu cuota y formaliza tu crédito con nuestro equipo de ventas en Palmira.</p>
+        <p>Simula tu cuota y formaliza tu crédito con nuestro equipo de ventas en el Valle del Cauca.</p>
       </PageHeader>
       <section className="sec sec--tight">
         <div className="container fin">

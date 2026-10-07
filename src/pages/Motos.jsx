@@ -51,37 +51,36 @@ export default function Motos() {
     <>
       <PageHeader eyebrow={cat ? "Línea AKT" : "Catálogo"} title={cat ? cat.nombre : "Todas las motos"}
         crumbs={cat ? [{ label: "Motos", to: "/motos" }, { label: cat.nombre }] : [{ label: "Motos" }]} image={img(destacada)}>
-        <p>{cat ? `${cat.lema}. ${base.length} modelos disponibles en Palmira.` : `${MOTOS.length} modelos en ${CATEGORIAS.length} líneas. Filtra, compara y cotiza tu próxima AKT.`}</p>
+        <p>{cat ? `${cat.lema}. ${base.length} modelos disponibles en el Valle del Cauca.` : `${MOTOS.length} modelos en ${CATEGORIAS.length} líneas. Filtra, compara y cotiza tu próxima AKT.`}</p>
       </PageHeader>
 
       <section className="sec sec--tight">
         <div className="container cat">
-          <aside className={`filters ${filtros ? "is-open" : ""}`}>
-            <div className="filters__block">
-              <h4>Líneas</h4>
-              <Link to="/motos" className={`filters__cat ${!cat ? "is-on" : ""}`}><span>Todas</span><small>{MOTOS.length}</small></Link>
-              {CATEGORIAS.map((c) => {
-                const Icon = categoryIcon[c.id];
-                return (
-                  <Link key={c.id} to={`/motos/${c.id}`} className={`filters__cat ${cat?.id === c.id ? "is-on" : ""}`}>
-                    {Icon && <Icon width="22" height="22" />}<span>{c.nombre}</span><small>{motosDe(c.id).length}</small>
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="filters__block">
-              <h4>Cilindraje</h4>
-              {RANGOS.map((r) => (
-                <label key={r.id} className="check"><input type="checkbox" checked={rangos.includes(r.id)} onChange={() => toggleR(r.id)} /> {r.label}</label>
-              ))}
-            </div>
-            <div className="filters__block">
-              <h4>Precio máximo</h4>
-              <input type="range" min={4000000} max={MAXP} step={500000} value={maxP} onChange={(e) => setMaxP(+e.target.value)} aria-label="Precio máximo" />
-              <p className="filters__val">Hasta <b>{maxP.toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 })}</b></p>
-            </div>
-            <button className="btn btn--ghost btn--sm" onClick={limpiar}>Limpiar filtros</button>
-          </aside>
+        <aside className={`filters ${filtros ? "is-open" : ""}`}>
+          <div className="filters__block">
+            <h4>Líneas</h4>
+            <Link to="/motos" className={`filters__cat ${!cat ? "is-on" : ""}`}>
+              <span>Todas</span><small>{MOTOS.length}</small>
+            </Link>
+            {CATEGORIAS.map((c) => (
+              <Link key={c.id} to={`/motos/${c.id}`} className={`filters__cat ${cat?.id === c.id ? "is-on" : ""}`}>
+                <span>{c.nombre}</span><small>{motosDe(c.id).length}</small>
+              </Link>
+            ))}
+          </div>
+          <div className="filters__block">
+            <h4>Cilindraje</h4>
+            {RANGOS.map((r) => (
+              <label key={r.id} className="check"><input type="checkbox" checked={rangos.includes(r.id)} onChange={() => toggleR(r.id)} /> {r.label}</label>
+            ))}
+          </div>
+          <div className="filters__block">
+            <h4>Precio máximo</h4>
+            <input type="range" min={4000000} max={MAXP} step={500000} value={maxP} onChange={(e) => setMaxP(+e.target.value)} aria-label="Precio máximo" />
+            <p className="filters__val">Hasta <b>{maxP.toLocaleString("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 })}</b></p>
+          </div>
+          <button className="btn btn--ghost btn--sm" onClick={limpiar}>Limpiar filtros</button>
+        </aside>
 
           <div className="cat__main">
             <div className="toolbar">

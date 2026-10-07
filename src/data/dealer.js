@@ -13,8 +13,8 @@ function getSiguienteDigital() {
 
 export const dealer = {
   businessName: "Sumoto S.A.",
-  displayName: "AKT Palmira",
-  city: "Palmira, Valle del Cauca",
+  displayName: "AKT Valle",
+  city: "el Valle del Cauca",
   email: "jefecomercialakt@sumoto.com.co",
   phone: "+57 310 2889425",
   nationalLine: "01 8000 524 066",
@@ -43,7 +43,7 @@ export const dealer = {
     },
     {
       id: "segunda",
-      nombre: "Sede 2 - Vitrina y Entregas",
+      nombre: "Sede 2 - Vitrina y Entregas Palmira",
       direccion: "CRA. 33A # 30-114, Palmira, Valle del Cauca",
       mapsQuery: "CRA. 33A # 30-114, Palmira",
       mapsLink: "https://www.google.com/maps/search/?api=1&query=CRA.+33A+%2330-142,+Palmira",
@@ -61,7 +61,7 @@ export const dealer = {
 
 export function waLink(message) {
   const numero = getSiguienteDigital();
-  return `https://wa.me/${numero}?text=${encodeURIComponent(message || "Hola AKT Palmira, quiero información sobre una moto.")}`;
+  return `https://wa.me/${numero}?text=${encodeURIComponent(message || "Hola AKT Valle, quiero información sobre una moto.")}`;
 }
 
 export function openWaDigitales(message) {
@@ -77,7 +77,7 @@ export function openWaRepuestos(message) {
 }
 
 export function waTaller(message) {
-  return `https://wa.me/${dealer.whatsappTaller}?text=${encodeURIComponent(message || "Hola, quiero agendar servicio en el taller AKT Palmira.")}`;
+  return `https://wa.me/${dealer.whatsappTaller}?text=${encodeURIComponent(message || "Hola, quiero agendar servicio en el taller AKT Valle.")}`;
 }
 
 export function openWaTaller(message) {

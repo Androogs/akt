@@ -28,7 +28,7 @@ export default function Contacto() {
               <span className="channel__icon"><IconPin width="22" height="22" /></span><span><small>Visítanos</small><b>{dealer.address}</b></span>
             </Link>
           </div>
-          <LeadForm titulo="Envíanos tu mensaje" asunto="Contacto web – AKT Palmira"
+          <LeadForm titulo="Envíanos tu mensaje" asunto="Contacto web – AKT Valle"
             fields={[
               { name: "nombre", label: "Nombre completo", required: true },
               { name: "celular", label: "Celular", type: "tel", required: true },

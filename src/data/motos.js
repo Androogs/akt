@@ -1,5 +1,5 @@
 /**
- * CATÁLOGO AKT – Concesionario Palmira (SUMOTO S.A.)
+ * CATÁLOGO AKT – Concesionario Valle (SUMOTO S.A.)
  * ------------------------------------------------------------------
  * Precios: los del proyecto original (tomados de aktmotos.com); verificados
  * contra el sitio de AKT en septiembre de 2026. Fichas técnicas: aktmotos.com.

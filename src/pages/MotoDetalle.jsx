@@ -99,7 +99,7 @@ export default function MotoDetalle() {
       <section className="sec sec--gray">
         <div className="container pd__bottom">
           <div>
-            <span className="eyebrow">Pruébala en Palmira</span>
+            <span className="eyebrow">Pruébala en el Valle del Cauca</span>
             <h2 className="h-display">Agenda tu test ride</h2>
             <p className="muted">Conoce la {moto.nombre} en persona y resuelve tus dudas con un asesor de Sumoto S.A.</p>
             <LeadForm asunto={`Prueba de manejo – AKT ${moto.nombre}`} boton="Agendar prueba" initial={{ moto: moto.nombre }}

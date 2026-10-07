@@ -39,7 +39,7 @@ export default function Footer() {
         <div>
           <h4>Contacto</h4>
           <ul className="footer__contact">
-            <li><IconPin width="16" height="16" /> {dealer.address}</li>
+            <li><IconPin width="16" height="16" />Sede Principal: {dealer.address}</li>
             <li><IconPhone width="16" height="16" /> <a href={`tel:${dealer.phone.replace(/\s+/g, "")}`}>{dealer.phone}</a></li>
             <li><IconMail width="16" height="16" /> <a href={`mailto:${dealer.email}`}>{dealer.email}</a></li>
             <li>Línea nacional AKT: {dealer.nationalLine}</li>
@@ -48,7 +48,7 @@ export default function Footer() {
       </div>
       <div className="container footer__bottom">
         <p>© {new Date().getFullYear()} {dealer.businessName} Concesionario autorizado AKT Motos. Todos los derechos reservados.</p>
-        <p>Sitio del concesionario de Palmira, no es el sitio oficial de AKT Motos nacional. Precios de referencia sujetos a cambio sin previo aviso; no incluyen matrícula, SOAT ni seguros. Imágenes de referencia.</p>
+        <p>Sitio del concesionarios en el Valle del Cauca, no es el sitio oficial de AKT Motos nacional. Precios de referencia sujetos a cambio sin previo aviso; no incluyen matrícula, SOAT ni seguros. Imágenes de referencia.</p>
         <p><Link to="/contacto#datos">Política de tratamiento de datos personales (Ley 1581 de 2012)</Link></p>
       </div>
     </footer>

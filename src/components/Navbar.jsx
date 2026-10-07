@@ -39,9 +39,9 @@ export default function Navbar() {
         </div>
       </div>
       <div className="container nav__bar">
-        <Link to="/" className="nav__logo" aria-label="AKT Palmira – inicio">
+        <Link to="/" className="nav__logo" aria-label="AKT Valle – inicio">
           <img src="/akt-logo-white-crop.png" alt="AKT Motos" />
-          <span>Palmira</span>
+          <span>Sumoto S.A.</span>
         </Link>
 
         <nav className="nav__links" aria-label="Principal">
@@ -60,7 +60,7 @@ export default function Navbar() {
           )}
         </nav>
 
-        <a className="btn btn--red btn--sm nav__cta" href={waLink("Hola, quiero cotizar una moto AKT en Palmira.")} target="_blank" rel="noreferrer">
+        <a className="btn btn--red btn--sm nav__cta" href={waLink("Hola, quiero cotizar una moto AKT.")} target="_blank" rel="noreferrer">
           <IconWhatsapp width="18" height="18" /> Cotiza tu AKT
         </a>
         <button className="nav__burger" onClick={() => setOpen(!open)} aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open}>
@@ -80,7 +80,7 @@ export default function Navbar() {
               )}
             </div>
           ))}
-          <a className="btn btn--red btn--block" href={waLink("Hola, quiero cotizar una moto AKT en Palmira.")} target="_blank" rel="noreferrer">
+          <a className="btn btn--red btn--block" href={waLink("Hola, quiero cotizar una moto AKT.")} target="_blank" rel="noreferrer">
             <IconWhatsapp width="18" height="18" /> Cotiza por WhatsApp
           </a>
         </nav>
@@ -93,21 +93,21 @@ function MegaMenu({ visible }) {
   const [cat, setCat] = useState(CATEGORIAS[0].id);
   const lista = motosDe(cat);
   return (
-    <div className={`mega ${visible ? "is-visible" : ""}`}>
+    <div className={`mega ${visible? "is-visible" : ""}`}>
       <div className="container mega__inner">
         <ul className="mega__cats">
-          {CATEGORIAS.map((c) => {
-            const Icon = categoryIcon[c.id];
-            return (
-              <li key={c.id}>
-                <Link to={`/motos/${c.id}`} onMouseEnter={() => setCat(c.id)} className={cat === c.id ? "is-on" : ""}>
-                  {Icon && <Icon width="26" height="26" />}
-                  <span>{c.nombre}</span>
-                  <small>{motosDe(c.id).length}</small>
-                </Link>
-              </li>
-            );
-          })}
+          {CATEGORIAS.map((c) => (
+            <li key={c.id}>
+              <Link
+                to={`/motos/${c.id}`}
+                onMouseEnter={() => setCat(c.id)}
+                className={`mega__catlink ${cat === c.id? "is-on" : ""}`}
+              >
+                <span className="mega__catname">{c.nombre}</span>
+                <small className="mega__catcount">{motosDe(c.id).length}</small>
+              </Link>
+            </li>
+          ))}
         </ul>
         <div className="mega__models">
           {lista.map((m) => (

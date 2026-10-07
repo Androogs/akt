@@ -9,15 +9,33 @@ import useReveal from "../components/useReveal.js";
 const SLIDES = DESTACADAS.map(getMoto).filter(Boolean);
 const MS = 6000;
 
+// CARRUSEL NUEVO - pon tus imagenes en /public
+const BANNERS = [
+  "public/akt-motos-home-banner-nkd-desktop.webp",
+  "public/akt-motos-home-banner-seguridad-vial-desktop-v2.webp",
+  "public/Banner_home_agosto_NKD-01-1.jpg"
+];
+const MS_BANNER = 1800;
+
 export default function Inicio() {
   const [i, setI] = useState(0);
   const [pausa, setPausa] = useState(false);
+  const [b, setB] = useState(0);
+  const [pausaB, setPausaB] = useState(false);
+
   useReveal();
+
   useEffect(() => {
     if (pausa) return;
     const t = setTimeout(() => setI((i + 1) % SLIDES.length), MS);
     return () => clearTimeout(t);
   }, [i, pausa]);
+
+  useEffect(() => {
+    if (pausaB) return;
+    const t = setInterval(() => setB((p) => (p + 1) % BANNERS.length), MS_BANNER);
+    return () => clearInterval(t);
+  }, [pausaB]);
 
   const m = SLIDES[i];
   const cat = getCategoria(m.categoria);
@@ -25,35 +43,18 @@ export default function Inicio() {
 
   return (
     <>
-      <section className="hx" onMouseEnter={() => setPausa(true)} onMouseLeave={() => setPausa(false)}>
-        <div className="hx__stripes" aria-hidden="true"><i /><i /><i /><i /></div>
-        <div className="hx__big" aria-hidden="true" key={`b${i}`}>{Math.round(parseFloat(String(m.resumen.cc).replace(",", ".")))}<small>cc</small></div>
-        <div className="container hx__inner">
-          <div className="hx__copy" key={`c${i}`}>
-            <span className="eyebrow eyebrow--light">Línea {cat.nombre}</span>
-            <h1 className="h-display h-display--xl">{m.nombre}</h1>
-            <p className="hx__lema">{m.lema}</p>
-            <dl className="hx__kpis">
-              <div><dt>Potencia</dt><dd>{m.resumen.hp}<small>hp</small></dd></div>
-              <div><dt>Torque</dt><dd>{m.resumen.nm}<small>Nm</small></dd></div>
-              <div><dt>Precio desde</dt><dd className="is-price">{cop(m.precio)}*</dd></div>
-            </dl>
-            {save > 0 && <p className="hx__save">Ahorra {cop(save)} frente al precio regular</p>}
-            <div className="hx__ctas">
-              <Link to={`/moto/${m.slug}`} className="btn btn--red">Ver ficha completa <IconArrow /></Link>
-              <a className="btn btn--line" href={waLink(`Hola, quiero cotizar la AKT ${m.nombre}.`)} target="_blank" rel="noreferrer"><IconWhatsapp width="18" height="18" /> Cotizar</a>
-            </div>
-          </div>
-          <div className="hx__media" key={`m${i}`}>
-            <img src={img(m)} alt={`AKT ${m.nombre}`} />
-          </div>
+      <section className="bc" onMouseEnter={() => setPausaB(true)} onMouseLeave={() => setPausaB(false)}>
+        <div className="bc__track">
+          {BANNERS.map((src, k) => (
+            <img key={k} src={src} alt={`Banner ${k + 1}`} className={`bc__img ${k === b? "is-on" : ""}`} />
+          ))}
         </div>
-        <div className="container hx__rail" role="tablist" aria-label="Modelos destacados">
-          {SLIDES.map((s, k) => (
-            <button key={s.slug} role="tab" aria-selected={k === i} className={`hx__thumb ${k === i ? "is-on" : ""}`} onClick={() => setI(k)}>
-              <img src={img(s)} alt="" />
-              <span>{s.nombre}</span>
-              <i className="hx__progress"><b style={{ animationDuration: `${MS}ms`, animationPlayState: pausa ? "paused" : "running" }} /></i>
+        <button className="bc__arrow bc__arrow--prev" onClick={() => setB((p) => (p - 1 + BANNERS.length) % BANNERS.length)}>‹</button>
+        <button className="bc__arrow bc__arrow--next" onClick={() => setB((p) => (p + 1) % BANNERS.length)}>›</button>
+        <div className="bc__dots">
+          {BANNERS.map((_, k) => (
+            <button key={k} className={`bc__dot ${k === b? "is-on" : ""}`} onClick={() => setB(k)} aria-label={`Banner ${k + 1}`}>
+              <i><b style={{ animationDuration: `${MS_BANNER}ms`, animationPlayState: pausaB? "paused" : "running", animationName: k === b? "bc-progress" : "none" }} /></i>
             </button>
           ))}
         </div>
@@ -71,12 +72,11 @@ export default function Inicio() {
           <div className="lines">
             {CATEGORIAS.map((c, k) => {
               const lista = motosDe(c.id);
-              const hero = lista.reduce((a, b) => (b.precio > a.precio ? b : a), lista[0]);
+              const hero = lista.reduce((a, b) => (b.precio > a.precio? b : a), lista[0]);
               const Icon = categoryIcon[c.id];
               return (
-                <Link key={c.id} to={`/motos/${c.id}`} className={`line reveal ${k === 0 ? "line--wide" : ""}`} style={{ "--d": `${k * 60}ms` }}>
+                <Link key={c.id} to={`/motos/${c.id}`} className={`line reveal ${k === 0? "line--wide" : ""}`} style={{ "--d": `${k * 60}ms` }}>
                   <div className="line__text">
-                    {Icon && <Icon width="30" height="30" />}
                     <h3>{c.nombre}</h3>
                     <p>{c.lema}</p>
                     <small>{lista.length} modelos · desde {cop(Math.min(...lista.map((x) => x.precio)))}*</small>
