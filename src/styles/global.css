@@ -544,3 +544,52 @@ button { cursor: pointer; }
 .sim__media img {position: relative;z-index: 1;width: 115%;max-width: none;margin-left: -8%;filter: drop-shadow(0 20px 25px rgba(0, 36, 63, 0.15));animation: fade .35s;}
 .sim__media strong {position: relative;z-index: 1;margin-top: 14px;font-family: var(--f-display);font-size: 1.9rem;text-transform: uppercase;line-height: 1;color: var(--navy);}
 .sim__media span {position: relative;z-index: 1;color: var(--grey);font-weight: 600;}
+
+/* ---------- Barra de sede (ubicación actual + cambiar sede) ---------- */
+.sede-bar { background: var(--navy-3); color: #fff; font-size: .82rem; position: relative; z-index: 61; }
+.sede-bar__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 8px; padding-bottom: 8px; }
+.sede-bar__loc { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.sede-bar__loc svg { color: #fff; flex-shrink: 0; }
+.sede-bar__dir { color: #d5e0ea; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 52ch; }
+.sede-bar__change { background: none; border: 0; padding: 0; margin-left: 10px; color: #fff; font-weight: 800; white-space: nowrap; }
+.sede-bar__change:hover { text-decoration: underline; color: #fff; }
+.sede-bar__mail, .sede-bar__phone { display: inline-flex; align-items: center; gap: 8px; color: #d5e0ea; font-weight: 500; }
+.sede-bar__mail:hover, .sede-bar__phone:hover { color: #fff; }
+.sede-bar__right { display: inline-flex; align-items: center; gap: 18px; flex-shrink: 0; }
+/* Navbar sin segunda barra: el fondo arranca desde arriba */
+.nav--single::before { top: 0; }
+
+/* ---------- Modal elige tu sede ---------- */
+.sede-modal__overlay { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: rgba(6,24,39,.72); backdrop-filter: blur(4px); animation: pageIn .25s var(--ease); }
+.sede-modal { position: relative; width: min(1000px, 100%); max-height: 88vh; overflow-y: auto; background: #fff; border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.55); }
+.sede-modal__stripe { position: sticky; top: 0; height: 6px; background: linear-gradient(90deg, var(--red) 0 70%, var(--navy) 70%); border-radius: 12px 12px 0 0; }
+.sede-modal__close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; display: grid; place-items: center; background: var(--mist); border: 0; border-radius: 50%; color: var(--navy); }
+.sede-modal__close:hover { background: var(--red); color: #fff; }
+.sede-modal__head { padding: 26px 32px 0; text-align: center; }
+.sede-modal__logo { height: 40px; width: auto; margin: 0 auto 12px; background: var(--navy); padding: 6px 16px; border-radius: var(--r); }
+.sede-modal__head .h-display { color: var(--navy); margin-bottom: 6px; }
+.sede-modal__head .muted { margin: 0 auto; max-width: 60ch; }
+.sede-modal__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; padding: 22px 32px 10px; }
+.sede-card { display: grid; gap: 8px; align-content: start; text-align: left; background: var(--mist); border: 2px solid transparent; border-radius: 10px; padding: 16px; color: var(--ink); transition: .2s var(--ease); }
+.sede-card:hover { border-color: var(--navy); transform: translateY(-2px); box-shadow: var(--shadow); }
+.sede-card.is-active { background: #fff; border-color: var(--red); box-shadow: var(--shadow); }
+.sede-card__top { display: flex; align-items: center; gap: 8px; color: var(--navy); }
+.sede-card__top > svg { color: var(--red); flex-shrink: 0; }
+.sede-card__top strong { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 1.12rem; letter-spacing: .02em; }
+.sede-card__check { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 11px; border-radius: 99px; border: 1px solid rgba(255,255,255,.25); box-shadow: 0 4px 12px -2px rgba(21,128,61,.55), inset 0 1px 0 rgba(255,255,255,.35); }
+.sede-card__check svg, .sede-card__check svg path { color: #fff !important; stroke: #fff !important; flex-shrink: 0; }
+.sede-card__dir { font-size: .9rem; color: var(--ink); font-weight: 500; }
+.sede-card__meta { display: grid; gap: 4px; font-size: .82rem; color: var(--grey); }
+.sede-card__meta span { display: inline-flex; align-items: center; gap: 6px; }
+.sede-card__cta { margin-top: 4px; display: inline-flex; align-items: center; justify-content: center; padding: 10px; border-radius: var(--r); background: var(--navy); color: #fff; font-family: var(--f-display); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; font-size: .95rem; }
+.sede-card.is-active .sede-card__cta { background: var(--red); }
+.sede-modal__foot { padding: 6px 32px 26px; text-align: center; font-size: .82rem; color: var(--grey); }
+
+@media (max-width: 760px) {
+  .sede-bar__mail { display: none; }
+  .sede-bar__dir { max-width: 36vw; }
+  .sede-bar__right { gap: 0; }
+  .sede-modal__head { padding: 22px 20px 0; }
+  .sede-modal__grid { grid-template-columns: 1fr; padding: 18px 20px 8px; }
+  .sede-modal__foot { padding: 6px 20px 22px; }
+}

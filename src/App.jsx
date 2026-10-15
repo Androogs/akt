@@ -3,6 +3,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import WhatsappFab from "./components/WhatsappFab.jsx";
+import SedeBar from "./components/SedeBar.jsx";
+import SedeModal from "./components/SedeModal.jsx";
+import { SedeProvider } from "./components/SedeContext.jsx";
 import Inicio from "./pages/Inicio.jsx";
 import Motos from "./pages/Motos.jsx";
 import MotoDetalle from "./pages/MotoDetalle.jsx";
@@ -18,7 +21,8 @@ export default function App() {
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" }); }, [pathname]);
 
   return (
-    <>
+    <SedeProvider>
+      <SedeBar />
       <Navbar />
       <main key={pathname} className="page">
         <Routes>
@@ -36,6 +40,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsappFab />
-    </>
+      <SedeModal />
+    </SedeProvider>
   );
 }

@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import { CATEGORIAS } from "../data/motos.js";
 import { dealer } from "../data/dealer.js";
+import { useSede } from "./SedeContext.jsx";
 import { IconFacebook, IconInstagram, IconTiktok, IconPin, IconPhone, IconMail } from "./Icons.jsx";
 
 export default function Footer() {
+  const { sede, abrirModal } = useSede();
+  const direccion = sede?.direccion || dealer.address;
+  const nombreSede = sede?.nombre || "Sede Principal";
+  const telefono = sede?.asesores?.[0]?.telefono || dealer.phone;
   const redes = [
     [dealer.socials.facebook, IconFacebook, "Facebook"],
     [dealer.socials.instagram, IconInstagram, "Instagram"],
@@ -39,8 +44,8 @@ export default function Footer() {
         <div>
           <h4>Contacto</h4>
           <ul className="footer__contact">
-            <li><IconPin width="16" height="16" />Sede Principal: {dealer.address}</li>
-            <li><IconPhone width="16" height="16" /> <a href={`tel:${dealer.phone.replace(/\s+/g, "")}`}>{dealer.phone}</a></li>
+            <li><IconPin width="16" height="16" />{nombreSede}: {direccion} <button type="button" onClick={abrirModal} style={{ background: "none", border: 0, padding: 0, color: "#fff", fontWeight: 800, textDecoration: "underline", cursor: "pointer" }}>Cambiar sede</button></li>
+            <li><IconPhone width="16" height="16" /> <a href={`tel:${telefono.replace(/\s+/g, "")}`}>{telefono}</a></li>
             <li><IconMail width="16" height="16" /> <a href={`mailto:${dealer.email}`}>{dealer.email}</a></li>
             <li>Línea nacional AKT: {dealer.nationalLine}</li>
           </ul>

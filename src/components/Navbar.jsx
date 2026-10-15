@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { CATEGORIAS } from "../data/motos.js";
-import { dealer, waLink } from "../data/dealer.js";
+import { waLink } from "../data/dealer.js";
 import { img, motosDe, cop } from "../utils/catalogo.js";
-import { IconMenu, IconClose, IconDown, IconWhatsapp, IconArrow, IconPhone, categoryIcon } from "./Icons.jsx";
+import { IconMenu, IconClose, IconDown, IconWhatsapp, IconArrow, categoryIcon } from "./Icons.jsx";
 
 const LINKS = [
   { to: "/", label: "Inicio", end: true },
@@ -31,13 +31,7 @@ export default function Navbar() {
   useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; }, [open]);
 
   return (
-    <header className={`nav ${scrolled ? "is-scrolled" : ""}`}>
-      <div className="nav__top">
-        <div className="container nav__topInner">
-          <span>{dealer.businessName} · Concesionario oficial AKT Motos en {dealer.city}</span>
-          <a href={`tel:${dealer.phone.replace(/\s+/g, "")}`}><IconPhone width="14" height="14" /> {dealer.phone}</a>
-        </div>
-      </div>
+    <header className={`nav nav--single ${scrolled ? "is-scrolled" : ""}`}>
       <div className="container nav__bar">
         <Link to="/" className="nav__logo" aria-label="AKT Valle – inicio">
           <img src="/akt-logo-white-crop.png" alt="AKT Motos" />
